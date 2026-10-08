@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN"><head><script src="film-shim.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>创作者中心 · CutCod</title><link rel="icon" href="assets/cutcod-logo.jpg"><link rel="stylesheet" href="contribute.css?v=20261007-submission-helper-1"><link rel="stylesheet" href="auth-modal.css?v=20261006-auth-modal-1"><script src="copy-templates.js?v=20261008-source-materials-14" defer></script>
+<script src="cloudbase-config.js?v=20261006-auth-adapter-2" defer></script><!-- Official Tencent CloudBase Web SDK v3 CDN. Pin a tested 3.x version for production. --><script src="auth.js?v=20261006-auth-adapter-3" defer></script><script src="auth-modal.js?v=20261006-auth-modal-1" defer></script><script src="api.js?v=20261006-auth-adapter-3" defer></script><script src="contribute.js?v=20261008-source-materials-14" defer></script></head>
+<body>
+<header class="header"><a href="./" class="brand"><img src="assets/cutcod-logo.jpg" alt=""><strong>CutCod</strong><span>创作者中心</span></a><div class="header-actions"><a href="./">浏览资源 ↗</a><div class="account-wrap"><a class="account-entry" id="accountEntry" href="./" aria-haspopup="menu" aria-expanded="false">登录</a><div class="account-menu" id="accountMenu" role="menu" hidden><div class="account-menu-header"><strong id="accountMenuName" class="account-menu-name"></strong><span id="accountMenuEmail" class="account-menu-email"></span></div><a class="account-menu-link" data-menu="work" role="menuitem" href="./contribute.html">我的作品</a><a class="account-menu-link" data-menu="favorites" role="menuitem" href="./?favorites=1">我的收藏</a><a class="account-menu-link" data-menu="submit" role="menuitem" href="./contribute.html?open=1">提交新资源</a><a class="account-menu-link" data-menu="admin" id="accountAdminItem" role="menuitem" href="https://admin.cutcod.com/admin.html" hidden>管理后台</a><div class="account-menu-divider" role="separator"></div><button class="account-menu-logout" id="accountLogout" role="menuitem" type="button">退出登录</button></div></div></div></header>
+<main>
+<section id="authView" class="auth-layout" hidden aria-hidden="true"><div class="intro"><span class="eyebrow">MADE TO BE SHARED</span><h1>让你的动效，<br>成为下一个灵感。</h1><p>分享可复现的视频源代码、提示词和 Skill。<br>附上预览视频，让创作方法被看见。</p><div class="steps"><span>01　提交作品</span><span>02　内容审核</span><span>03　公开展示</span></div></div></section>
+<section id="creatorView" hidden>
+  <div class="page-heading"><div><span class="eyebrow">YOUR CREATIVE LIBRARY</span><h1 id="greeting">我的作品</h1><p class="muted">保存灵感，提交作品，查看审核进度。</p></div><button class="primary" id="newResource">＋ 提交新资源</button></div>
+  <div class="summary"><div><strong id="statAll">0</strong><span>全部投稿</span></div><div><strong id="statPublished">0</strong><span>已发布</span></div><div><strong id="statPending">0</strong><span>待审核</span></div><div><strong id="statDraft">0</strong><span>草稿</span></div></div>
+  <div class="list-heading"><h2>投稿记录</h2><button id="refreshList" class="quiet">刷新</button></div><p id="listError" class="form-error" role="alert"></p><div id="myResources" class="resource-list"></div>
+</section>
+</main>
+<dialog id="editor" class="editor" aria-labelledby="editorTitle"><button id="closeEditor" class="close" type="button" aria-label="关闭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><form id="resourceForm"><div class="editor-heading"><span id="editorTitle" class="sr-only">提交新资源</span></div><div class="editor-top-grid"><div class="editor-top-settings"><div class="editor-heading-controls"><label>分组<select id="type"><option value="code">视频源代码</option><option value="prompt">视频提示词</option><option value="skill">视频 Skill</option></select></label><label>分类<select id="category"><option value="product">产品动画</option><option value="knowledge">知识讲解</option><option value="other">其他</option></select></label></div></div><div class="editor-top-preview"><label class="file-zone preview-zone">预览视频<span>MP4 / WebM · 最大 100 MB</span><input id="videoFile" type="file" accept="video/mp4,video/webm"><b>选择视频文件</b></label><span id="videoFileName" class="file-name"></span><video id="videoPreview" controls playsinline muted hidden></video><div class="metadata-fields" hidden aria-hidden="true"><label>时长<output id="duration" class="metadata-value">上传视频后自动识别</output></label><label>宽高比<output id="ratioDisplay" class="metadata-value">上传视频后自动识别</output></label><input id="ratio" type="hidden" value=""></div></div></div><section id="submissionHelper" class="submission-helper" hidden aria-labelledby="submissionHelperTitle">
+  <div class="submission-helper-heading"><h3 id="submissionHelperTitle">不会写，复制以下内容到你的智能体</h3><button id="copySubmissionHelper" class="quiet helper-copy" type="button">复制指令</button></div>
+  <textarea id="submissionHelperText" class="submission-helper-text" rows="8" readonly aria-label="提交辅助指令" spellcheck="false"></textarea>
+  <p id="submissionHelperStatus" class="submission-helper-status" role="status" aria-live="polite" hidden></p>
+</section>
+<div class="editor-layout">
+  <div class="fields">
+    <label>作品标题<input id="title" required maxlength="160" placeholder="给作品一个清晰的名字"></label>
+    <label>作品简介<textarea id="description" required maxlength="4000" rows="3" placeholder="介绍适用场景、实现方式和使用前提"></textarea></label>
+    <p id="publicationDateNote" class="muted note"></p>
+  </div>
+  <div class="media-fields">
+    <p id="typeIntro" class="type-intro" aria-live="polite" hidden></p>
+    <label id="resourceInstructionsField" class="resource-instructions" hidden><span class="field-title"><span id="resourceInstructionsLabel">安装与使用说明（可选）</span><small id="resourceInstructionsHint" class="field-hint">补充必要的安装和调用信息；单独展示，不加入复制指令。</small></span><textarea id="resourceInstructions" maxlength="12000" rows="4" placeholder="仅填写必要的安装、运行或调用信息；单独展示，不加入复制指令"></textarea></label>
+    <section id="resourceFileOptions" class="resource-file-options" hidden>
+      <h3 id="resourceFilesTitle">视频源代码文件</h3>
+      <div class="file-option-list"><label class="file-option"><input id="sourceOption" type="checkbox"><span>来源链接</span></label><label class="file-option"><input id="attachmentOption" type="checkbox"><span id="attachmentOptionLabel">源码附件</span></label></div>
+      <label id="sourceField" class="conditional-field"><span class="field-title"><span>来源链接</span><small id="sourceFieldHint" class="field-hint">填写后会自动加入到用户的可复制内容。</small></span><input id="source" type="url" maxlength="3000" placeholder="https://github.com/... 或原作者页面"></label>
+      <label id="attachmentField" class="file-zone compact conditional-field"><span id="attachmentLabel" hidden>源码附件（可选）</span><span id="attachmentHint">ZIP、SKILL、MD、JSON 或源代码文件</span><input id="attachmentFile" type="file" accept=".zip,.skill,.md,.txt,.json,.js,.ts,.tsx,.html,.css"><b>选择附件</b><small id="attachmentUserHint" class="attachment-user-hint">上传后会自动生成下载链接，并加入到用户的可复制内容。</small></label>
+      <span id="attachmentName" class="file-name conditional-field"></span>
+      <label id="resourceMaterialsField" hidden><span>补充材料链接（可选）</span><textarea id="resourceMaterials" rows="3" maxlength="60020" placeholder="https://…" aria-label="补充材料链接"></textarea><small class="field-hint">填写主仓库或附件之外必需的素材链接，一行一条，最多 20 条。链接会加入用户复制内容，无需填写运行命令。</small></label>
+    </section>
+  </div>
+</div><label id="copyLabel" class="copy-preview"><span class="field-title"><span id="copyLabelText">预览用户复制的内容</span><small id="copyHint" class="field-hint" hidden>可直接复制给常用智能体运行。</small></span><textarea id="copyText" rows="6" maxlength="30000" placeholder="粘贴完整视频提示词、变量和使用步骤"></textarea></label><p class="muted note">只有通过审核的作品才会公开展示。已发布作品修改后会重新进入审核。</p><p id="editorError" class="form-error" role="alert"></p><div class="editor-footer"><span id="uploadState" role="status"></span><button type="submit" name="action" value="draft" class="quiet" formnovalidate>保存草稿</button><button type="submit" name="action" value="pending" class="primary">提交审核</button></div></form></dialog>
+<div id="toast" role="status"></div>
+</body></html>
+
+
+
+
+
+

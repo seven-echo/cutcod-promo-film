@@ -1,0 +1,20 @@
+{
+  "name": "cutcod-promo-film",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "CutCod 58-second product promo, rendered from code: the real cutcod.com pages driven in a headless browser + GSAP timeline + code-synthesized score.",
+  "scripts": {
+    "setup": "node tools/fetch-media.mjs",
+    "music": "node tools/py.mjs tools/score.py",
+    "plan": "node tools/py.mjs tools/make_plan.py && node tools/py.mjs tools/cues.py",
+    "mix": "node tools/py.mjs tools/mix_audio.py plan.json",
+    "build": "node build.mjs",
+    "preview": "node build.mjs && node preview.mjs",
+    "stills": "node stills.mjs",
+    "render": "node render.mjs --audio assets/master.wav --output renders/cutcod-promo.mp4",
+    "film": "npm run mix && npm run build && npm run render",
+    "check": "node tools/py.mjs tools/check_delivery.py plan.json --video renders/cutcod-promo.mp4 --mix-report evidence/audio-mix.json"
+  },
+  "devDependencies": {"esbuild": "0.27.3", "gsap": "3.15.0", "playwright": "1.58.1", "react": "19.2.3", "react-dom": "19.2.3", "three": "0.186.1"}
+}

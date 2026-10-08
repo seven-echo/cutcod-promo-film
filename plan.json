@@ -1,0 +1,654 @@
+{
+ "demo": false,
+ "product": "CutCod · 可复现视频资源库",
+ "style": "repo",
+ "width": 1920,
+ "height": 1080,
+ "fps": 30,
+ "duration": 58,
+ "repo": "public/site",
+ "scope": {
+  "versions": "cutcod.com 线上版（2026-10-08 抓取）",
+  "platforms": [
+   "web"
+  ],
+  "notCovered": [
+   "后台 admin.cutcod.com",
+   "登录后的创作者中心投稿表单"
+  ]
+ },
+ "audioRequired": true,
+ "sfxRequired": true,
+ "typography": {
+  "mode": "bilingual",
+  "zhFont": "PingFang SC（本机已装，与网站同字体栈）",
+  "enFont": "Segoe UI Black / Bold（本机字体）",
+  "zhStyle": "sans-serif"
+ },
+ "audio": {
+  "ducking": {
+   "enabled": true
+  },
+  "music": {
+   "file": "assets/music.wav",
+   "gain": 0.62
+  },
+  "beatGrid": {
+   "bpm": 120,
+   "offset": 0
+  },
+  "cues": [
+   {
+    "at": 3.997,
+    "actionId": "brand-hit",
+    "file": "assets/sfx/resolve.wav",
+    "gain": 1.7,
+    "role": "sfx",
+    "kind": "resolve",
+    "syncOffset": 0.003
+   },
+   {
+    "at": 7.198,
+    "actionId": "brand-fly",
+    "file": "assets/sfx/whoosh.wav",
+    "gain": 2.6,
+    "role": "sfx",
+    "kind": "whoosh",
+    "syncOffset": 0.202
+   },
+   {
+    "at": 8.999,
+    "actionId": "site-ring1",
+    "file": "assets/sfx/pop.wav",
+    "gain": 2.2,
+    "role": "sfx",
+    "kind": "pop",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 9.499,
+    "actionId": "site-ring2",
+    "file": "assets/sfx/pop.wav",
+    "gain": 2.2,
+    "role": "sfx",
+    "kind": "pop",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 9.999,
+    "actionId": "site-ring3",
+    "file": "assets/sfx/pop.wav",
+    "gain": 2.2,
+    "role": "sfx",
+    "kind": "pop",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 12.399,
+    "actionId": "code-tab",
+    "file": "assets/sfx/click.wav",
+    "gain": 3.0,
+    "role": "sfx",
+    "kind": "click",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 15.399,
+    "actionId": "code-open",
+    "file": "assets/sfx/pop.wav",
+    "gain": 2.2,
+    "role": "sfx",
+    "kind": "pop",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 18.597,
+    "actionId": "code-copy",
+    "file": "assets/sfx/success.wav",
+    "gain": 1.8,
+    "role": "sfx",
+    "kind": "success",
+    "syncOffset": 0.003
+   },
+   {
+    "at": 23.608,
+    "actionId": "code-out",
+    "file": "assets/sfx/sweep.wav",
+    "gain": 2.4,
+    "role": "sfx",
+    "kind": "sweep",
+    "syncOffset": 0.342
+   },
+   {
+    "at": 24.299,
+    "actionId": "agent-paste",
+    "file": "assets/sfx/typing.wav",
+    "gain": 3.6,
+    "role": "sfx",
+    "kind": "typing",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 25.599,
+    "actionId": "agent-step1",
+    "file": "assets/sfx/toggle.wav",
+    "gain": 2.8,
+    "role": "sfx",
+    "kind": "toggle",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 26.499,
+    "actionId": "agent-step2",
+    "file": "assets/sfx/toggle.wav",
+    "gain": 2.8,
+    "role": "sfx",
+    "kind": "toggle",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 27.299,
+    "actionId": "agent-step3",
+    "file": "assets/sfx/toggle.wav",
+    "gain": 2.8,
+    "role": "sfx",
+    "kind": "toggle",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 27.598,
+    "actionId": "agent-done",
+    "file": "assets/sfx/ding-dong.wav",
+    "gain": 1.5,
+    "role": "sfx",
+    "kind": "ding-dong",
+    "syncOffset": 0.002
+   },
+   {
+    "at": 30.499,
+    "actionId": "prompt-tab",
+    "file": "assets/sfx/click-alt.wav",
+    "gain": 3.2,
+    "role": "sfx",
+    "kind": "click-alt",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 33.599,
+    "actionId": "prompt-open",
+    "file": "assets/sfx/pop.wav",
+    "gain": 2.2,
+    "role": "sfx",
+    "kind": "pop",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 35.599,
+    "actionId": "prompt-copy",
+    "file": "assets/sfx/click.wav",
+    "gain": 3.0,
+    "role": "sfx",
+    "kind": "click",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 37.499,
+    "actionId": "skill-tab",
+    "file": "assets/sfx/click-alt.wav",
+    "gain": 3.2,
+    "role": "sfx",
+    "kind": "click-alt",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 40.849,
+    "actionId": "skill-note",
+    "file": "assets/sfx/pop.wav",
+    "gain": 2.2,
+    "role": "sfx",
+    "kind": "pop",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 44.599,
+    "actionId": "find-cat",
+    "file": "assets/sfx/click.wav",
+    "gain": 3.0,
+    "role": "sfx",
+    "kind": "click",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 46.299,
+    "actionId": "find-search",
+    "file": "assets/sfx/click-alt.wav",
+    "gain": 3.2,
+    "role": "sfx",
+    "kind": "click-alt",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 46.399,
+    "actionId": "find-type",
+    "file": "assets/sfx/typing.wav",
+    "gain": 3.6,
+    "role": "sfx",
+    "kind": "typing",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 48.399,
+    "actionId": "find-lang",
+    "file": "assets/sfx/toggle.wav",
+    "gain": 2.8,
+    "role": "sfx",
+    "kind": "toggle",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 50.899,
+    "actionId": "share-click",
+    "file": "assets/sfx/click.wav",
+    "gain": 3.0,
+    "role": "sfx",
+    "kind": "click",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 50.999,
+    "actionId": "share-modal",
+    "file": "assets/sfx/pop.wav",
+    "gain": 2.2,
+    "role": "sfx",
+    "kind": "pop",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 51.999,
+    "actionId": "share-type",
+    "file": "assets/sfx/typing.wav",
+    "gain": 3.6,
+    "role": "sfx",
+    "kind": "typing",
+    "syncOffset": 0.001
+   },
+   {
+    "at": 53.997,
+    "actionId": "outro-hit",
+    "file": "assets/sfx/resolve.wav",
+    "gain": 1.7,
+    "role": "sfx",
+    "kind": "resolve",
+    "syncOffset": 0.003
+   }
+  ]
+ },
+ "shots": [
+  {
+   "id": "hook",
+   "start": 0,
+   "end": 4,
+   "type": "title",
+   "headlineEn": "See it. Copy it. Make it.",
+   "headline": "看到喜欢的视频，自己也能做",
+   "description": "",
+   "descriptionAt": 0.9,
+   "claim": false,
+   "source": [],
+   "component": null,
+   "plainExplanation": "开场：一面由 CutCod 站内真实作品封面组成的影墙。",
+   "actions": [
+    {
+     "id": "hook-copy",
+     "at": 0.2,
+     "action": "英文标题入场",
+     "soundRequired": false
+    },
+    {
+     "id": "hook-mark",
+     "at": 2.2,
+     "action": "荧光笔扫过关键词",
+     "soundRequired": false
+    }
+   ]
+  },
+  {
+   "id": "brand",
+   "start": 4,
+   "end": 8,
+   "type": "title",
+   "headlineEn": "A library of reproducible videos",
+   "headline": "CutCod · 可复现视频资源库",
+   "description": "",
+   "descriptionAt": 0.6,
+   "claim": false,
+   "source": [],
+   "component": null,
+   "plainExplanation": "品牌：Logo、产品名和网站标题。",
+   "actions": [
+    {
+     "id": "brand-hit",
+     "at": 0.0,
+     "action": "品牌 Logo 落下",
+     "soundRequired": true
+    },
+    {
+     "id": "brand-fly",
+     "at": 3.4,
+     "action": "Logo 飞到网站导航",
+     "soundRequired": true
+    }
+   ]
+  },
+  {
+   "id": "site",
+   "start": 8,
+   "end": 12,
+   "type": "workspace",
+   "headlineEn": "Three ways to remake",
+   "headline": "三种复现方式",
+   "description": "每支视频都附上做法：源代码、提示词或 Skill，挑一种就能开始。",
+   "descriptionAt": 0.4,
+   "claim": true,
+   "source": [
+    "file:public/site/index.html",
+    "file:public/site/catalog-layout.js"
+   ],
+   "component": "public/site/index.html",
+   "plainExplanation": "网站按“视频源代码 / 视频提示词 / 视频 Skill”三类收录作品，每条都带可以复制的内容。",
+   "actions": [
+    {
+     "id": "site-ring1",
+     "at": 1.0,
+     "action": "圈出视频源代码",
+     "soundRequired": true
+    },
+    {
+     "id": "site-ring2",
+     "at": 1.5,
+     "action": "圈出视频提示词",
+     "soundRequired": true
+    },
+    {
+     "id": "site-ring3",
+     "at": 2.0,
+     "action": "圈出视频 Skill",
+     "soundRequired": true
+    }
+   ]
+  },
+  {
+   "id": "code",
+   "start": 12,
+   "end": 24,
+   "type": "detail",
+   "headlineEn": "Source code",
+   "headline": "视频源代码",
+   "description": "源代码类：整套工程交给你，复现后还能接着改。",
+   "descriptionAt": 0.7,
+   "claim": true,
+   "source": [
+    "file:public/site/catalog.js",
+    "file:public/site/copy-templates.js",
+    "file:public/site/api/resources.json"
+   ],
+   "component": "public/site/index.html#modalBackdrop",
+   "plainExplanation": "点开一条源代码作品，弹窗里有成片、源码地址和复现步骤；点“复制”会把整段说明放进剪贴板，并提示“已复制，可以粘贴使用”。",
+   "actions": [
+    {
+     "id": "code-tab",
+     "at": 0.4,
+     "action": "点击“视频源代码”标签",
+     "soundRequired": true
+    },
+    {
+     "id": "code-mark",
+     "at": 1.8,
+     "action": "荧光笔扫过“节省95%token”",
+     "soundRequired": false
+    },
+    {
+     "id": "code-open",
+     "at": 3.4,
+     "action": "点开 UI Morph 作品弹窗",
+     "soundRequired": true
+    },
+    {
+     "id": "code-copy",
+     "at": 6.6,
+     "action": "点击复制，出现已复制提示",
+     "soundRequired": true
+    },
+    {
+     "id": "code-out",
+     "at": 11.95,
+     "action": "推入复制框转场",
+     "soundRequired": true
+    }
+   ]
+  },
+  {
+   "id": "agent",
+   "start": 24,
+   "end": 30,
+   "type": "illustration",
+   "headlineEn": "Paste & reproduce",
+   "headline": "粘贴给智能体",
+   "description": "粘贴给 Codex 或 Claude，按说明把工程跑起来，接着就能改。",
+   "descriptionAt": 0.5,
+   "claim": false,
+   "source": [
+    "file:public/site/catalog.js"
+   ],
+   "component": null,
+   "plainExplanation": "示意画面：把复制的说明粘贴到智能体，它按其中步骤读取源码、安装依赖、生成预览。智能体界面为示意，不是 CutCod 的界面。",
+   "actions": [
+    {
+     "id": "agent-paste",
+     "at": 0.3,
+     "action": "复制内容落进对话框",
+     "soundRequired": true
+    },
+    {
+     "id": "agent-step1",
+     "at": 1.6,
+     "action": "读取源码完成",
+     "soundRequired": true
+    },
+    {
+     "id": "agent-step2",
+     "at": 2.5,
+     "action": "安装依赖完成",
+     "soundRequired": true
+    },
+    {
+     "id": "agent-step3",
+     "at": 3.3,
+     "action": "生成预览完成",
+     "soundRequired": true
+    },
+    {
+     "id": "agent-done",
+     "at": 3.6,
+     "action": "复现出的视频出现",
+     "soundRequired": true
+    }
+   ]
+  },
+  {
+   "id": "prompt",
+   "start": 30,
+   "end": 37,
+   "type": "detail",
+   "headlineEn": "Video prompts",
+   "headline": "视频提示词",
+   "description": "提示词类：先看成片，复制完整提示词，交给 Claude Opus 5.5 及以上模型复现。",
+   "descriptionAt": 1.0,
+   "claim": true,
+   "source": [
+    "file:public/site/catalog.js",
+    "file:public/site/catalog-layout.js",
+    "file:public/site/api/resources.json"
+   ],
+   "component": "public/site/index.html",
+   "plainExplanation": "切到“视频提示词”，每张卡是一支用提示词生成的视频；打开后可以复制完整提示词。",
+   "actions": [
+    {
+     "id": "prompt-tab",
+     "at": 0.5,
+     "action": "点击“视频提示词”标签",
+     "soundRequired": true
+    },
+    {
+     "id": "prompt-open",
+     "at": 3.6,
+     "action": "打开 Liquid Glass 作品",
+     "soundRequired": true
+    },
+    {
+     "id": "prompt-copy",
+     "at": 5.6,
+     "action": "复制完整提示词",
+     "soundRequired": true
+    }
+   ]
+  },
+  {
+   "id": "skill",
+   "start": 37,
+   "end": 44,
+   "type": "detail",
+   "headlineEn": "Video skills",
+   "headline": "视频 Skill",
+   "description": "Skill 类：装进你的智能体，用 Agent Skill 产出新的创意视频。",
+   "descriptionAt": 1.0,
+   "claim": true,
+   "source": [
+    "file:public/site/catalog.js",
+    "file:public/site/api/resources.json"
+   ],
+   "component": "public/site/index.html",
+   "plainExplanation": "切到“视频 Skill”，收录可安装的 Agent Skill；第一张就是制作本片所用的“真实产品宣传片 Skill”。",
+   "actions": [
+    {
+     "id": "skill-tab",
+     "at": 0.5,
+     "action": "点击“视频 Skill”标签",
+     "soundRequired": true
+    },
+    {
+     "id": "skill-note",
+     "at": 3.85,
+     "action": "标注本片用它制作",
+     "soundRequired": true
+    }
+   ]
+  },
+  {
+   "id": "find",
+   "start": 44,
+   "end": 50,
+   "type": "detail",
+   "headlineEn": "Find it fast",
+   "headline": "筛选、搜索、中英切换",
+   "description": "按类别筛选、按关键词搜索，界面一键切换中英文。",
+   "descriptionAt": 0.4,
+   "claim": true,
+   "source": [
+    "file:public/site/catalog.js",
+    "file:public/site/catalog-layout.js",
+    "file:public/site/index.html"
+   ],
+   "component": "public/site/index.html",
+   "plainExplanation": "点“产品动画”只看产品类作品；在搜索框输入“宣传”结果立刻变少；点“中 / EN”整站换成英文。",
+   "actions": [
+    {
+     "id": "find-cat",
+     "at": 0.6,
+     "action": "点击产品动画分类",
+     "soundRequired": true
+    },
+    {
+     "id": "find-type",
+     "at": 2.4,
+     "action": "输入搜索词",
+     "soundRequired": true
+    },
+    {
+     "id": "find-search",
+     "at": 2.3,
+     "action": "点进搜索框",
+     "soundRequired": true
+    },
+    {
+     "id": "find-lang",
+     "at": 4.4,
+     "action": "切换中英文",
+     "soundRequired": true
+    }
+   ]
+  },
+  {
+   "id": "share",
+   "start": 50,
+   "end": 54,
+   "type": "detail",
+   "headlineEn": "Share yours",
+   "headline": "上传你的作品",
+   "description": "做了好视频？点「上传」，登录后就能投稿分享。",
+   "descriptionAt": 0.3,
+   "claim": true,
+   "source": [
+    "file:public/site/index.html",
+    "file:public/site/contribute.html",
+    "file:public/site/contribute.js",
+    "file:public/site/auth-modal.js"
+   ],
+   "component": "public/site/contribute.html",
+   "plainExplanation": "点首页黄色“上传”进入创作者中心，未登录时弹出邮箱验证码登录，登录后提交作品，审核通过后公开展示。",
+   "actions": [
+    {
+     "id": "share-click",
+     "at": 0.9,
+     "action": "点击上传",
+     "soundRequired": true
+    },
+    {
+     "id": "share-modal",
+     "at": 1.0,
+     "action": "登录弹窗出现",
+     "soundRequired": true
+    },
+    {
+     "id": "share-type",
+     "at": 2.0,
+     "action": "输入邮箱",
+     "soundRequired": true
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "start": 54,
+   "end": 58,
+   "type": "end",
+   "headlineEn": "See it. Copy it. Make it.",
+   "headline": "看到喜欢的，复制下来，自己也能做",
+   "description": "cutcod.com",
+   "descriptionAt": 0.8,
+   "claim": false,
+   "source": [],
+   "component": null,
+   "plainExplanation": "落版：Logo、产品名、网址。",
+   "actions": [
+    {
+     "id": "outro-hit",
+     "at": 0.0,
+     "action": "黄色落版铺满",
+     "soundRequired": true
+    }
+   ]
+  }
+ ],
+ "poster": true
+}

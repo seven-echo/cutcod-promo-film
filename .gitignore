@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.build/
+renders/
+media/
+public/clips/
+public/site/assets/posters/
+assets/master.wav
+assets/music-ducked.wav
+assets/sfx-stem.wav
+evidence/*
+!evidence/.gitkeep
+*.log
+.env*
+.DS_Store
+Thumbs.db
