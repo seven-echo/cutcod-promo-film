@@ -48,7 +48,7 @@ npm run build && node render.mjs --from 12 --to 24 --output renders/draft.mp4   
 | `src/film.css` | 画面规范：颜色、字号阶梯、字幕卡、各镜头布局 |
 | `public/site/` | cutcod.com 前台快照；`tools/film-shim.js` 让它离线、确定性运行 |
 | `DIRECTION.md` | 影片方向与逐秒镜头表 |
-| `templates/flagship-promo/` | 直接播放 `sites.jsx` 的 `site`→`code` 镜头（整页 1.3334，再走荧光笔、开卡、复制）。不改 `plan.json`。预览：`node templates/flagship-promo/preview.mjs` |
+| `templates/flagship-promo/` | 15 秒宣传模板，只用 CutCod 的配色、246 卡片和字号。不打开资源库，不改 `plan.json`。预览：`node templates/flagship-promo/preview.mjs` |
 | `tools/score.py` | 配乐（120 BPM，F 大调，马林巴 + 拨弦低音 + 轻鼓） |
 | `tools/cues.py` | 按 `plan.json` 动作生成音效 cue；`tools/mix_audio.py` 混音并让位 |
 
