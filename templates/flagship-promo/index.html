@@ -2,486 +2,71 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>CutCod · 15 秒宣传模板</title>
+    <title>CutCod · 网站镜头</title>
     <link rel="icon" href="data:," />
-    <script src="/node_modules/gsap/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="/src/film.css" />
     <style>
-      :root {
-        --ink: #171717;
-        --muted: #77756f;
-        --cream: #f7f7f7;
-        --paper: #fff;
-        --line: #e7e7e7;
-        --yellow: #f1f32d;
-        --en: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-        --zh: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
-      }
-      * { box-sizing: border-box; }
-      html, body { margin: 0; background: #111; color: var(--ink); }
-      body { min-height: 100vh; }
-      body { height: 100vh; display: flex; flex-direction: column; align-items: center; }
-      #fit { flex: 1; width: 100%; display: grid; place-items: center; overflow: hidden; }
+      html, body { height: 100%; background: #111; }
+      body { display: flex; flex-direction: column; }
+      #fit { flex: 1; display: grid; place-items: center; overflow: hidden; }
       #scaler { position: relative; }
-      body.render #fit { width: 1920px; height: 1080px; }
+      #film-root { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
       body.render #bar { display: none; }
-      #stage {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 1920px;
-        height: 1080px;
-        overflow: hidden;
-        background: var(--cream);
-        transform-origin: center center;
-        font-family: var(--zh);
-      }
-      .scene { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
-      .kicker {
-        font-family: var(--en);
-        font-weight: 800;
-        font-size: 22px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .card {
-        width: 480px;
-        background: var(--paper);
-        border-radius: 22px;
-        box-shadow: 0 28px 70px rgba(22, 22, 20, 0.12);
-        padding: 28px 28px 32px;
-      }
-      .card-top, .meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: var(--en);
-        font-weight: 700;
-        font-size: 18px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .pill {
-        font-family: var(--zh);
-        font-weight: 700;
-        letter-spacing: 0;
-        text-transform: none;
-        background: var(--yellow);
-        color: var(--ink);
-        border-radius: 999px;
-        padding: 5px 14px;
-      }
-      .art {
-        height: 250px;
-        margin: 22px 0 18px;
-        border-radius: 16px;
-        background: var(--cream);
-        position: relative;
-        overflow: hidden;
-      }
-      .ring {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 150px;
-        height: 150px;
-        margin: -75px 0 0 -75px;
-        border-radius: 50%;
-        border: 16px solid #dedcd6;
-        border-top-color: var(--ink);
-        border-right-color: var(--yellow);
-      }
-      .lines { position: absolute; left: 36px; right: 36px; top: 48px; display: flex; flex-direction: column; gap: 16px; }
-      .lines i { display: block; height: 18px; border-radius: 6px; background: var(--ink); }
-      .lines i:nth-child(2) { width: 78%; background: var(--yellow); }
-      .lines i:nth-child(3) { width: 54%; background: #dedcd6; }
-      .skill-mark {
-        position: absolute;
-        left: 36px;
-        right: 36px;
-        top: 78px;
-        height: 92px;
-        border-radius: 16px;
-        background: var(--yellow);
-      }
-      .title { font-weight: 800; font-size: 48px; letter-spacing: -0.03em; }
-      .meta { margin-top: 10px; font-size: 16px; }
-      .hl { position: relative; display: inline-block; }
-      .hl i {
-        position: absolute;
-        left: -8px;
-        right: -8px;
-        top: 58%;
-        height: 42%;
-        background: var(--yellow);
-        mix-blend-mode: multiply;
-        transform-origin: 0 50%;
-        z-index: -1;
-        border-radius: 3px;
-      }
-      .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; }
-      .word > span { display: inline-block; }
-      #hook .copy { position: absolute; left: 120px; top: 250px; width: 980px; }
-      #hook .kicker { margin-bottom: 28px; }
-      #hook h1 { margin: 0; font-size: 92px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
-      #hook .sub { margin-top: 28px; font-size: 40px; font-weight: 700; }
-      #hook .card { position: absolute; left: 1220px; top: 180px; }
-      #show { background: var(--yellow); }
-      #show .label {
-        position: absolute;
-        left: 120px;
-        top: 96px;
-        font-family: var(--en);
-        font-weight: 800;
-        font-size: 22px;
-        letter-spacing: 0.14em;
-      }
-      #show .row { position: absolute; left: 120px; top: 220px; display: flex; gap: 40px; }
-      #pitch .card { position: absolute; left: 140px; top: 130px; width: 640px; }
-      #pitch .art { height: 320px; }
-      #pitch .copy { position: absolute; left: 900px; top: 300px; width: 860px; }
-      #pitch h2 { margin: 18px 0 0; font-size: 84px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
-      .btn {
-        margin-top: 28px;
-        display: inline-flex;
-        align-items: center;
-        height: 72px;
-        padding: 0 32px;
-        border-radius: 999px;
-        background: var(--ink);
-        color: #fff;
-        font-weight: 700;
-        font-size: 28px;
-      }
-      .toast {
-        position: absolute;
-        left: 140px;
-        bottom: 120px;
-        background: #1b1b1a;
-        color: #fff;
-        border-radius: 999px;
-        padding: 16px 28px;
-        font-weight: 700;
-        font-size: 26px;
-      }
-      #whip { background: var(--cream); }
-      .band {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 360px;
-        height: 280px;
-        background: var(--ink);
-        color: #fff;
-        display: flex;
-        align-items: center;
-        gap: 64px;
-        padding-left: 140px;
-        overflow: hidden;
-        transform-origin: 50% 50%;
-      }
-      .band b { font-family: var(--en); font-weight: 800; font-size: 120px; letter-spacing: -0.04em; }
-      #whip .sub { position: absolute; left: 140px; top: 690px; font-size: 36px; font-weight: 700; color: var(--muted); }
-      #board { background: var(--cream); }
-      .bento { position: absolute; left: 120px; top: 220px; width: 1680px; height: 520px; display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 28px; }
-      .box { background: var(--paper); border-radius: 22px; padding: 36px; box-shadow: 0 18px 50px rgba(22, 22, 20, 0.06); overflow: hidden; }
-      .box h3 { margin: 0 0 24px; font-family: var(--en); font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-      .step { display: flex; align-items: center; gap: 18px; font-size: 36px; font-weight: 700; margin: 22px 0; }
-      .dot { width: 36px; height: 36px; border-radius: 50%; background: var(--line); color: var(--ink); display: grid; place-items: center; font-family: var(--en); font-size: 20px; font-weight: 800; }
-      .num { font-family: var(--en); font-weight: 800; font-size: 120px; letter-spacing: -0.05em; line-height: 0.9; }
-      .num .unit { font-size: 48px; }
-      .stamp {
-        position: absolute;
-        right: 200px;
-        top: 540px;
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        background: var(--yellow);
-        display: grid;
-        place-items: center;
-        font-weight: 800;
-        font-size: 42px;
-        letter-spacing: -0.03em;
-      }
-      #line { background: var(--yellow); }
-      #line .copy { position: absolute; left: 140px; top: 300px; }
-      #line h2 { margin: 0; font-size: 120px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
-      #line .card { position: absolute; left: 1280px; top: 250px; transform: scale(0.86); transform-origin: 100% 50%; }
-      #outro { background: var(--yellow); }
-      .brand {
-        position: absolute;
-        left: 160px;
-        top: 340px;
-        display: flex;
-        align-items: center;
-        gap: 36px;
-      }
-      .brand img { width: 140px; height: 140px; border-radius: 32px; background: #fff; object-fit: cover; }
-      .letters { font-family: var(--en); font-weight: 800; font-size: 140px; letter-spacing: -0.045em; line-height: 1; }
-      .letter { display: inline-block; overflow: hidden; height: 1.05em; }
-      .letter > span { display: inline-block; }
-      .url { position: absolute; left: 336px; top: 560px; font-family: var(--en); font-weight: 700; font-size: 32px; letter-spacing: 0.08em; }
-      #bar {
-        height: 56px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 0 18px;
-        background: #1b1b1a;
-        color: #fff;
-        font: 600 14px var(--en);
-      }
+      #bar { height: 56px; display: flex; align-items: center; gap: 16px; padding: 0 18px; background: #1b1b1a; color: #fff; font: 600 14px "Segoe UI", sans-serif; }
       #bar input { flex: 1; }
     </style>
   </head>
   <body>
     <div id="fit">
-      <div id="scaler">
-        <main id="stage"></main>
-      </div>
+      <div id="scaler"><div id="film-root"></div></div>
     </div>
     <div id="bar">
       <span id="clock">0.00</span>
-      <input id="scrub" type="range" min="0" max="15" step="0.01" value="0" />
+      <input id="scrub" type="range" min="0" max="16" step="0.01" value="0" />
       <button id="play" type="button">播放</button>
     </div>
-    <script>
-      const DURATION = 15;
-      const T = { hook: 0, show: 2.35, pitch: 4.55, whip: 6.55, board: 8.15, line: 10.85, outro: 12.85, end: DURATION };
-      const stage = document.getElementById('stage');
+    <script type="module">
       const renderMode = new URLSearchParams(location.search).has('render');
       if (renderMode) document.body.classList.add('render');
-
-      const el = (tag, className, text) => {
-        const node = document.createElement(tag);
-        if (className) node.className = className;
-        if (text != null) node.textContent = text;
-        return node;
-      };
-      const words = (parent, text) => [...text].map((ch) => {
-        const wrap = el('span', 'word');
-        const inner = el('span', null, ch === ' ' ? '\u00a0' : ch);
-        wrap.append(inner);
-        parent.append(wrap);
-        return inner;
-      });
-      const mark = (text) => {
-        const hold = el('span', 'hl');
-        const ink = el('i');
-        hold.append(ink, el('span', null, text));
-        return { hold, ink };
-      };
-      const card = (kind, index, name, note) => {
-        const root = el('article', 'card');
-        const top = el('div', 'card-top');
-        top.append(el('span', 'pill', kind), el('span', null, index));
-        const art = el('div', 'art');
-        if (kind === '源代码') art.append(el('i', 'ring'));
-        else if (kind === '提示词') {
-          const lines = el('div', 'lines');
-          lines.append(el('i'), el('i'), el('i'));
-          art.append(lines);
-        } else art.append(el('i', 'skill-mark'));
-        root.append(top, art, el('div', 'title', name), el('div', 'meta', note));
-        return root;
-      };
-
-      const hook = el('section', 'scene');
-      hook.id = 'hook';
-      const hookCopy = el('div', 'copy');
-      const hookKicker = el('div', 'kicker', 'A library you can remake');
-      const hookH = el('h1');
-      const hookWords = words(hookH, '看到喜欢的');
-      const hookSub = el('div', 'sub');
-      const hookMark = mark('自己也能做');
-      hookSub.append(hookMark.hold);
-      hookCopy.append(hookKicker, hookH, hookSub);
-      const hookCard = card('源代码', '01', 'UI 形变', '15 秒 · 可复制');
-      hook.append(hookCopy, hookCard);
-
-      const show = el('section', 'scene');
-      show.id = 'show';
-      const showLabel = el('div', 'label', 'THREE WAYS');
-      const row = el('div', 'row');
-      const showCards = [
-        card('源代码', '01', 'UI 形变', '整套工程'),
-        card('提示词', '02', '产品动画', '交给模型'),
-        card('Skill', '03', '宣传片', '装进智能体'),
-      ];
-      row.append(...showCards);
-      show.append(showLabel, row);
-
-      const pitch = el('section', 'scene');
-      pitch.id = 'pitch';
-      const pitchCard = card('源代码', '01', 'UI 形变', '点一下，整段说明带走');
-      const pitchBtn = el('div', 'btn', '复制');
-      pitchCard.append(pitchBtn);
-      const pitchCopy = el('div', 'copy');
-      pitchCopy.append(el('div', 'kicker', '01 · Source code'));
-      const pitchH = el('h2');
-      const pitchWords = words(pitchH, '整段说明直接带走');
-      pitchCopy.append(pitchH);
-      const toast = el('div', 'toast', '已复制，可以粘贴到 Codex 或 Claude');
-      pitch.append(pitchCard, pitchCopy, toast);
-
-      const whip = el('section', 'scene');
-      whip.id = 'whip';
-      const band = el('div', 'band');
-      const whipWords = ['复制', '粘贴', '跑起来'].map((text) => el('b', null, text));
-      band.append(...whipWords);
-      whip.append(band, el('div', 'sub', '交给 Codex 或 Claude'));
-
-      const board = el('section', 'scene');
-      board.id = 'board';
-      const bento = el('div', 'bento');
-      const stepsBox = el('div', 'box');
-      stepsBox.append(el('h3', null, 'Reproduce'));
-      const steps = ['读取工程', '按说明运行', '接着改文案'].map((text) => {
-        const row = el('div', 'step');
-        const dot = el('div', 'dot', '');
-        row.append(dot, el('span', null, text));
-        stepsBox.append(row);
-        return dot;
-      });
-      const countBox = el('div', 'box');
-      countBox.append(el('h3', null, 'Less prompting'));
-      const num = el('div', 'num');
-      const numValue = el('span', null, '0');
-      num.append(numValue, el('span', 'unit', '%'));
-      countBox.append(num, el('div', 'meta', '少改提示'));
-      const copyBox = el('div', 'box');
-      copyBox.append(el('h3', null, 'Copied'));
-      copyBox.append(el('div', 'title', '已复制'));
-      const stamp = el('div', 'stamp', '带走');
-      bento.append(stepsBox, countBox, copyBox);
-      board.append(bento, stamp);
-
-      const line = el('section', 'scene');
-      line.id = 'line';
-      const lineCopy = el('div', 'copy');
-      const lineH = el('h2');
-      const lineWords = words(lineH, '看到喜欢的');
-      const lineSub = el('div', 'sub');
-      lineSub.style.marginTop = '28px';
-      lineSub.style.fontSize = '72px';
-      lineSub.style.fontWeight = '800';
-      const lineMark = mark('自己也能做');
-      lineSub.append(lineMark.hold);
-      lineCopy.append(lineH, lineSub);
-      const lineCard = card('源代码', '01', 'UI 形变', '同一张卡');
-      line.append(lineCopy, lineCard);
-
-      const outro = el('section', 'scene');
-      outro.id = 'outro';
-      const brand = el('div', 'brand');
-      const logo = el('img');
-      logo.src = '/public/site/assets/cutcod-logo.jpg';
-      logo.alt = '';
-      const letters = el('div', 'letters');
-      const letterInners = [...'CutCod'].map((ch) => {
-        const wrap = el('span', 'letter');
-        const inner = el('span', null, ch);
-        wrap.append(inner);
-        letters.append(wrap);
-        return inner;
-      });
-      brand.append(logo, letters);
-      outro.append(brand, el('div', 'url', 'cutcod.com'));
-
-      stage.append(hook, show, pitch, whip, board, line, outro);
-      const scenes = [
-        { el: hook, start: T.hook, end: T.show + 0.45 },
-        { el: show, start: T.show, end: T.pitch + 0.45 },
-        { el: pitch, start: T.pitch, end: T.whip + 0.45 },
-        { el: whip, start: T.whip, end: T.board + 0.45 },
-        { el: board, start: T.board, end: T.line + 0.45 },
-        { el: line, start: T.line, end: T.outro + 0.45 },
-        { el: outro, start: T.outro, end: T.end + 1 },
-      ];
-
-      const tl = gsap.timeline({ paused: true });
-      const open = (node, at) => tl.fromTo(node, { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.48, ease: 'power3.inOut' }, at);
-      const rise = (nodes, at, stagger) => tl.fromTo(nodes, { yPercent: 110 }, { yPercent: 0, duration: 0.55, stagger, ease: 'expo.out' }, at);
-
-      tl.fromTo(hookKicker, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'expo.out' }, 0.12);
-      rise(hookWords, 0.28, 0.04);
-      tl.fromTo(hookMark.ink, { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: 'power3.out' }, 0.85);
-      tl.fromTo(hookCard, { x: 520 }, { x: 0, duration: 0.7, ease: 'expo.out' }, 0.2);
-
-      open(show, T.show);
-      tl.fromTo(showCards, { x: 880 }, { x: 0, duration: 0.7, stagger: 0.12, ease: 'expo.out' }, T.show + 0.18);
-
-      open(pitch, T.pitch);
-      rise(pitchWords, T.pitch + 0.28, 0.035);
-      tl.fromTo(pitchBtn, { scale: 1 }, { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1, ease: 'power3.inOut', immediateRender: false }, T.pitch + 0.85);
-      tl.fromTo(toast, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, T.pitch + 1.05);
-
-      tl.fromTo(band, { scaleY: 0 }, { scaleY: 1, duration: 0.28, ease: 'power3.inOut' }, T.whip);
-      tl.fromTo(whipWords, { x: 1600 }, { x: 0, duration: 0.42, stagger: 0.1, ease: 'power3.out' }, T.whip + 0.12);
-
-      tl.fromTo([...bento.children], { y: 90 }, { y: 0, duration: 0.55, stagger: 0.08, ease: 'expo.out' }, T.board);
-      tl.fromTo(stamp, { scale: 1.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: 'expo.out' }, T.board + 1.35);
-
-      open(line, T.line);
-      rise(lineWords, T.line + 0.2, 0.04);
-      tl.fromTo(lineMark.ink, { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: 'power3.out' }, T.line + 0.55);
-      tl.fromTo(lineCard, { x: 360, scale: 0.86 }, { x: 0, scale: 0.86, duration: 0.6, ease: 'expo.out' }, T.line + 0.15);
-
-      tl.fromTo(logo, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'expo.out' }, T.outro);
-      tl.fromTo(letterInners, { yPercent: 120 }, { yPercent: 0, duration: 0.45, stagger: 0.045, ease: 'expo.out' }, T.outro + 0.12);
-      tl.fromTo(outro.querySelector('.url'), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'expo.out' }, T.outro + 0.55);
-
-      function paint(time) {
-        const t = Math.min(DURATION, Math.max(0, time));
-        tl.seek(t, false);
-        for (const scene of scenes) scene.el.style.visibility = t >= scene.start && t < scene.end ? 'visible' : 'hidden';
-        const countStart = T.board + 0.35;
-        const countU = Math.min(1, Math.max(0, (t - countStart) / 0.8));
-        const eased = 1 - (1 - countU) * (1 - countU);
-        numValue.textContent = String(Math.round(eased * 95));
-        steps.forEach((dot, i) => {
-          const on = t >= T.board + 0.45 + i * 0.22;
-          dot.textContent = on ? '✓' : '';
-          dot.style.background = on ? '#f1f32d' : '#e7e7e7';
-        });
-        const clock = document.getElementById('clock');
-        const scrub = document.getElementById('scrub');
-        if (clock) clock.textContent = t.toFixed(2);
-        if (scrub && document.activeElement !== scrub) scrub.value = String(t);
-      }
-
-      let playing = false;
-      let last = 0;
-      function frame(now) {
-        if (!playing) return;
-        const dt = last ? (now - last) / 1000 : 0;
-        last = now;
-        const next = tl.time() + dt;
-        if (next >= DURATION) { playing = false; paint(DURATION); return; }
-        paint(next);
-        requestAnimationFrame(frame);
-      }
-      window.seek = paint;
-      window.playFilm = () => { playing = true; last = 0; requestAnimationFrame(frame); };
-
       const scaler = document.getElementById('scaler');
+      const stage = document.getElementById('film-root');
       const fit = () => {
         const scale = renderMode ? 1 : Math.min(window.innerWidth / 1920, (window.innerHeight - 56) / 1080);
-        scaler.style.width = `${1920 * scale}px`;
-        scaler.style.height = `${1080 * scale}px`;
-        stage.style.transformOrigin = '0 0';
+        scaler.style.width = 1920 * scale + 'px';
+        scaler.style.height = 1080 * scale + 'px';
         stage.style.transform = `scale(${scale})`;
       };
       addEventListener('resize', fit);
-      document.getElementById('scrub').addEventListener('input', (event) => { playing = false; paint(Number(event.target.value)); });
-      document.getElementById('play').addEventListener('click', () => {
-        if (tl.time() >= DURATION) paint(0);
-        window.playFilm();
-      });
       fit();
-      paint(0);
+
+      await import('/boot.js');
+      const duration = window.TEMPLATE.duration;
+      const scrub = document.getElementById('scrub');
+      const clock = document.getElementById('clock');
+      scrub.max = String(duration);
+      const show = (t) => { clock.textContent = t.toFixed(2); if (document.activeElement !== scrub) scrub.value = String(t); };
+      const filmSeek = window.seek;
+      window.seek = async (t) => { await filmSeek(t); show(Math.min(duration, Math.max(0, Number(t) || 0))); };
+      await window.__filmReady;
+      show(0);
+
+      let playing = false;
+      let last = 0;
+      const frame = async (now) => {
+        if (!playing) return;
+        const dt = last ? (now - last) / 1000 : 0;
+        last = now;
+        const next = Math.min(duration, Number(scrub.value) + dt);
+        await window.seek(next);
+        if (playing && next < duration) requestAnimationFrame(frame);
+        else playing = false;
+      };
+      window.playFilm = () => { playing = true; last = 0; requestAnimationFrame(frame); };
+      scrub.addEventListener('input', () => { playing = false; window.seek(Number(scrub.value)); });
+      document.getElementById('play').addEventListener('click', () => {
+        if (Number(scrub.value) >= duration) window.seek(0).then(() => window.playFilm());
+        else window.playFilm();
+      });
     </script>
   </body>
 </html>
